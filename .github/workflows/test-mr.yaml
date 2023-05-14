@@ -1,0 +1,29 @@
+name: Verify MR
+
+on:
+  pull_request: {}
+
+jobs:
+  build-mr:
+    strategy:
+      matrix:
+        distro:
+          - ubuntu-20.04
+          - ubuntu-22.04
+        repository:
+          - actions-runner
+          - actions-runner-dind
+    name: Build Container Image
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build and Push
+        uses: docker/build-push-action@v3
+        with:
+          push: false
+          build-args: |
+            DISTRO=${{ matrix.distro }}
+            REPOSITORY=${{ matrix.repository }}
+            RUNNER_VERSION=v2.304.0
