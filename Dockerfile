@@ -10,6 +10,7 @@ ENV CLOUD_SDK_VERSION=$CLOUD_SDK_VERSION
 ARG BUILDARCH
 
 USER root
+ENV HOME=/root
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   gettext-base \
@@ -32,4 +33,5 @@ RUN curl -Lo /tmp/helm.tar.gz https://get.helm.sh/helm-v${HELM_VERSION}-linux-${
   mv /tmp/linux-${BUILDARCH}/helm /usr/local/bin/helm && \
   chmod +x /usr/local/bin/helm && rm -rf /tmp/helm*
 
+ENV HOME=/home/runner
 USER runner
