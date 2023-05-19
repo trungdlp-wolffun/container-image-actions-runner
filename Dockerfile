@@ -6,7 +6,10 @@ FROM summerwind/${REPOSITORY}:${RUNNER_VERSION}-${DISTRO}
 
 ARG HELM_VERSION=3.12.0
 ARG CLOUD_SDK_VERSION=430.0.0
+ARG YQ_VERSION=4.33.3
+
 ENV CLOUD_SDK_VERSION=$CLOUD_SDK_VERSION
+ENV YQ_VERSION=$YQ_VERSION
 ARG BUILDARCH
 
 USER root
@@ -17,7 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   apt-transport-https \
   ca-certificates \
   gnupg \
-  curl
+  curl \
+  jq
 
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | \
   tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
@@ -32,6 +36,10 @@ RUN curl -Lo /tmp/helm.tar.gz https://get.helm.sh/helm-v${HELM_VERSION}-linux-${
   tar -C /tmp -xf /tmp/helm.tar.gz && \
   mv /tmp/linux-${BUILDARCH}/helm /usr/local/bin/helm && \
   chmod +x /usr/local/bin/helm && rm -rf /tmp/helm*
+
+RUN curl -Lo /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_${BUILDARCH} && \
+  chmod +x /usr/local/bin/yq && \
+  yq --version
 
 ENV HOME=/home/runner
 USER runner
