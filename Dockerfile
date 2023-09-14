@@ -21,7 +21,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   ca-certificates \
   gnupg \
   curl \
-  jq
+  jq \
+  parallel
 
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | \
   tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
