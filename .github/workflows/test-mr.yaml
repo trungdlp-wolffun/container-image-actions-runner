@@ -5,14 +5,6 @@ on:
 
 jobs:
   build-mr:
-    strategy:
-      matrix:
-        distro:
-          - ubuntu-20.04
-          - ubuntu-22.04
-        repository:
-          - actions-runner
-          - actions-runner-dind
     name: Build Container Image
     runs-on: ubuntu-20.04
     steps:
@@ -24,6 +16,4 @@ jobs:
         with:
           push: false
           build-args: |
-            DISTRO=${{ matrix.distro }}
-            REPOSITORY=${{ matrix.repository }}
-            RUNNER_VERSION=v2.304.0
+            RUNNER_VERSION=2.311.0
