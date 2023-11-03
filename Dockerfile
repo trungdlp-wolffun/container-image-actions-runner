@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   parallel \
   git \
   openssh-client \
+  unzip \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -47,6 +48,7 @@ RUN curl -Lo /tmp/helm.tar.gz https://get.helm.sh/helm-v${HELM_VERSION}-linux-${
 RUN curl -Lo /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_${BUILDARCH} && \
   chmod +x /usr/local/bin/yq && \
   yq --version
+
 
 ENV HOME=/home/runner
 USER runner
