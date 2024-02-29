@@ -22,7 +22,7 @@ jobs:
         with:
           flavor: |
             latest=false
-          images: ghcr.io/cucxabong/actions-runner
+          images: ghcr.io/trungdlp-wolffun/actions-runner
           tags: |
             type=semver,pattern={{raw}}
 
@@ -30,7 +30,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: cucxabong
+          username: trungdlp-wolffun
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and Push

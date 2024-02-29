@@ -16,4 +16,4 @@ jobs:
         with:
           push: false
           build-args: |
-            RUNNER_VERSION=2.311.0
+            RUNNER_VERSION=2.314.1
